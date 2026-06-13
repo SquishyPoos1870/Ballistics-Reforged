@@ -1,0 +1,87 @@
+[mod-setting-name]
+br-combat-fx-preset=Combat FX preset
+br-physical-bullets=Physical bullet tracers
+br-bullet-glow=Glowing bullet trails
+br-bullet-inaccuracy=Bullet inaccuracy
+br-bullet-range=Bullet projectile range
+br-bullet-speed=Bullet projectile speed
+br-gun-autoaim=Auto-target rifle weapons
+br-bullet-magazine-size=Rifle magazine size
+br-bullet-smoke-trails=Bullet smoke trails
+br-impact-fx=Impact sparks and smoke
+br-enemy-hit-fx=Enemy hit feedback
+br-structure-hit-fx=Structure hit feedback
+br-ground-impact-dust=Ground impact dust
+br-spitter-impact-fx=Spitter impact FX
+br-impact-layering=Impact layering
+br-big-fight-fx-cap=Big-fight FX cap
+br-shotgun-rework=Shotgun rework
+br-shotgun-autoaim=Auto-target shotgun weapons
+br-shotgun-dynamic-spread=Dynamic shotgun spread
+br-shotgun-magazine-size=Shotgun magazine size
+br-shotgun-range=Shotgun pellet range
+br-shotgun-fire-rate=Shotgun fire-rate multiplier
+br-shotgun-pellet-smoke=Shotgun pellet smoke
+br-physical-rockets=Physical rockets
+br-rocket-speed=Physical rocket speed
+br-rocket-wobble=Rocket inaccuracy / wobble
+br-rocket-smoke-trails=Rocket smoke trails
+br-heavy-impact-fx=Heavy ordnance impact FX
+br-arcing-throwables=Arcing grenades and capsules
+br-arcing-cannon-shells=Arcing cannon shells
+br-cannon-smoke-trails=Cannon shell smoke trails
+br-arcing-atomic-bomb=Arcing atomic bomb
+br-walls-block-spitters=Walls block spitter projectiles
+br-turret-leading=Turrets lead moving targets
+
+[mod-setting-description]
+br-combat-fx-preset=Scales the visual FX without changing weapon damage. Subtle is cleaner, Balanced is the intended default, Cinematic is heavier and flashier.
+br-physical-bullets=Turns instant rifle bullet damage into visible physical projectile tracers.
+br-bullet-glow=Adds a small warm light/tracer effect to physical bullets.
+br-bullet-inaccuracy=Higher values make physical bullets deviate more. Default is tuned for visible dakka without making turrets useless.
+br-bullet-range=Maximum range used by generated physical bullet projectiles.
+br-bullet-speed=Starting speed used by generated physical bullet projectiles. Higher values feel snappier; lower values make tracers more visible.
+br-gun-autoaim=Player rifle weapons target enemies automatically instead of firing only in a direction.
+br-bullet-magazine-size=Magazine size used for bullet-ammo prototypes affected by this mod.
+br-bullet-smoke-trails=Adds subtle smoke streaks behind generated bullet projectiles.
+br-impact-fx=Adds small hit puffs/sparks to generated bullets, shotgun pellets, and other tuned projectiles where safe.
+br-enemy-hit-fx=Adds extra fleshy mist/puff feedback to projectile impacts so bugs feel more like they are being hit.
+br-structure-hit-fx=Adds extra debris/smoke feedback to projectile impacts against walls, buildings, and other hard targets.
+br-ground-impact-dust=Adds extra dust puffs to impacts so misses and heavy hits feel more physical.
+br-spitter-impact-fx=Adds extra acid splash/smoke feedback to converted spitter projectile impacts.
+br-impact-layering=Controls how many extra smoke/dust layers are added to impacts. Clean is lighter, Balanced is recommended, Full is heavier.
+br-big-fight-fx-cap=Limits extra smoke layers on small bullet/shotgun impacts. Lower values are cleaner in large turret fights.
+br-shotgun-rework=Improves shotgun pellet behaviour, range, collision feel, and firing cadence.
+br-shotgun-autoaim=Player shotguns target enemies automatically. Hold the normal force-fire controls for manual behaviour.
+br-shotgun-dynamic-spread=Makes shotgun spread tighter near the cursor and wider over distance.
+br-shotgun-magazine-size=Magazine size used for shotgun shell prototypes affected by this mod.
+br-shotgun-range=Maximum range for tuned shotgun pellet projectile deliveries.
+br-shotgun-fire-rate=Multiplier applied to shotgun firing speed after the rework. 1.0 is the intended default.
+br-shotgun-pellet-smoke=Adds subtle smoke to shotgun pellets for a heavier close-range feel.
+br-physical-rockets=Rockets behave more like fired ordnance instead of hard-homing missiles.
+br-rocket-speed=Starting speed for physical rockets.
+br-rocket-wobble=Direction/range deviation for physical rockets. Higher values make rockets feel less laser-perfect.
+br-rocket-smoke-trails=Adds extra rocket smoke wake on top of compatible rocket projectiles.
+br-heavy-impact-fx=Adds heavier smoke/explosion polish to rockets, cannon shells, and arcing ordnance where safe.
+br-arcing-throwables=Grenades and throwable capsules travel in a visible arc.
+br-arcing-cannon-shells=Cannon shells travel in a heavier visible arc.
+br-cannon-smoke-trails=Adds smoke trails to cannon shell streams.
+br-arcing-atomic-bomb=Atomic bombs travel in a slower visible arc.
+br-walls-block-spitters=Converts spitter streams to physical projectiles that can collide with walls and entities.
+br-turret-leading=Adds projectile lead values to vanilla and compatible modded ammo turrets.
+
+[string-mod-setting]
+br-impact-layering-clean=Clean
+br-impact-layering-balanced=Balanced
+br-impact-layering-full=Full
+br-combat-fx-preset-subtle=Subtle
+br-combat-fx-preset-balanced=Balanced
+br-combat-fx-preset-cinematic=Cinematic
+
+[string-mod-setting-description]
+br-impact-layering-clean=Fewer extra impact layers. Best for large bases and heavy turret walls.
+br-impact-layering-balanced=Recommended default. Keeps hits visible without over-smoking the battlefield.
+br-impact-layering-full=Maximum impact polish. Best for screenshots, small fights, and cinematic gameplay.
+br-combat-fx-preset-subtle=Cleaner visuals for large bases and heavy turret fights.
+br-combat-fx-preset-balanced=Recommended default: visible combat polish without going overboard.
+br-combat-fx-preset-cinematic=Heavier smoke, stronger glow, and bigger impact feel. Best for screenshots and smaller fights.

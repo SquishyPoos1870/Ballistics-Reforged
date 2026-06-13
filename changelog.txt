@@ -1,0 +1,177 @@
+---------------------------------------------------------------------------------------------------
+Version: 1.0.0
+Date: 2026-06-13
+  Major Features:
+    - Final public release package renamed to Ballistics Reforged.
+    - Internal mod name changed to ballistics_reforged.
+    - Settings/prototype prefix changed from scr- to br- for cleaner final branding.
+    - Included the 288x288 Ballistics Reforged thumbnail.
+  Notes:
+    - First stable public release.
+    - GPL-3.0 derivative based on KS Combat / KS Combat Updated.
+    - Original author credit and license are kept.
+  License:
+    - GPL-3.0 derivative work based on KS Combat / KS Combat Updated by TheAppleIsALie and Klonan.
+---------------------------------------------------------------------------------------------------
+
+---------------------------------------------------------------------------------------------------
+Version: 1.0.0
+Date: 2026-06-13
+  Major Features:
+    - First stable public release of Ballistics Reforged.
+    - Finalised the new Ballistics Reforged branding and upload-ready package name.
+    - Included the clean name-only Ballistics Reforged thumbnail.
+    - Includes the 0.6.0 Combat Polish + FX Balance pass.
+  Minor Features:
+    - Updated info.json, README, and Mod Portal description for public release.
+    - Kept the stable 0.5.1 foot-FX hotfix intact.
+    - Kept the GPL-3.0 license and original author credits.
+  Notes:
+    - This is a heavily modified GPL-3.0 derivative based on KS Combat / KS Combat Updated.
+    - No source-side muzzle smoke was re-added.
+  License:
+    - GPL-3.0 derivative work based on KS Combat / KS Combat Updated by TheAppleIsALie and Klonan.
+---------------------------------------------------------------------------------------------------
+
+---------------------------------------------------------------------------------------------------
+Version: 0.6.0
+Date: 2026-06-13
+  Notes:
+    - Upload-ready package renamed from Squishy Combat Reforged to Ballistics Reforged.
+    - Updated mod identity, title, description, README, and thumbnail for the new Ballistics branding.
+    - Thumbnail simplified to a clean name-only version for a cleaner mod lineup.
+  License:
+    - GPL-3.0 derivative work based on KS Combat / KS Combat Updated by TheAppleIsALie and Klonan.
+---------------------------------------------------------------------------------------------------
+
+---------------------------------------------------------------------------------------------------
+Version: 0.6.0
+Date: 2026-06-13
+  Major Features:
+    - Added the Combat Polish + FX Balance pass.
+    - Added Impact layering with Clean, Balanced, and Full options.
+    - Added Big-fight FX cap to limit extra smoke/dust layers on small bullet and shotgun impacts.
+    - Improved Subtle/Balanced/Cinematic preset behaviour so large fights are cleaner while Cinematic can still look heavier.
+  Minor Features:
+    - Trimmed small bullet, shotgun, structure, ground, and bug-hit smoke scale/duration for better battlefield readability.
+    - Kept heavy ordnance and spitter impact FX more dramatic than small-arms hits.
+    - Slightly tightened generated bullet collision boxes.
+    - Slightly cleaned shotgun spread and pellet speed deviation.
+  Bugfixes:
+    - Kept the v0.5.1 source-side muzzle/launch smoke removal intact; no foot-position source smoke was reintroduced.
+    - Kept damage values unchanged.
+  License:
+    - GPL-3.0 derivative work based on KS Combat / KS Combat Updated by TheAppleIsALie and Klonan.
+---------------------------------------------------------------------------------------------------
+
+---------------------------------------------------------------------------------------------------
+Version: 0.5.1
+Date: 2026-06-13
+  Bugfixes:
+    - Removed the v0.5.0 source-side muzzle and launch smoke because Factorio placed those effects at the shooter body/feet rather than the weapon muzzle.
+    - Removed the source-side FX helper code from bullet, shotgun, rocket, and cannon delivery edits.
+    - Removed the v0.5.0 source-side FX startup settings to avoid confusing users with effects that cannot line up correctly yet.
+  Notes:
+    - Projectile trails, impact dust, enemy hit feedback, structure hit feedback, rocket smoke, cannon trails, and spitter impact FX are unchanged.
+    - This hotfix does not change damage values.
+  License:
+    - GPL-3.0 derivative work based on KS Combat / KS Combat Updated by TheAppleIsALie and Klonan.
+---------------------------------------------------------------------------------------------------
+
+---------------------------------------------------------------------------------------------------
+Version: 0.5.0
+Date: 2026-06-13
+  Major Features:
+    - Added the Weapon Feel pass.
+    - Added optional source-side muzzle and launch FX for generated bullet shots, shotgun blasts, physical rockets, and arcing cannon shells.
+    - Added four new startup toggles so players can disable individual source-side FX layers.
+  Minor Features:
+    - Added new trivial-smoke definitions for gun muzzle smoke, shotgun blast smoke, rocket launch smoke, and cannon launch smoke.
+    - Added shared helper functions for source effects so future weapon modules can reuse the same clean logic.
+    - Updated README, locale, and info.json for the v0.5.0 direction.
+  Bugfixes:
+    - Kept the new weapon-feel polish visual-only: no weapon damage values are changed by this pass.
+    - Kept all new source effects behind startup settings for easier compatibility testing.
+  License:
+    - GPL-3.0 derivative work based on KS Combat / KS Combat Updated by TheAppleIsALie and Klonan.
+---------------------------------------------------------------------------------------------------
+
+---------------------------------------------------------------------------------------------------
+Version: 0.4.0
+Date: 2026-06-13
+  Major Features:
+    - Added the new Impact Reforged pass for stronger enemy, structure, ground, and acid-impact feedback.
+    - Added new startup toggles for enemy hit feedback, structure hit feedback, ground impact dust, and spitter impact FX.
+    - Expanded shared impact helpers so bullet, shotgun, rocket, cannon, and other tuned projectile hits can layer extra dust/debris without touching damage values.
+  Minor Features:
+    - Added new trivial-smoke definitions for bug-hit mist, structure-hit smoke, ground dust, and acid impact smoke.
+    - Converted spitter projectiles now add optional extra acid splash feedback on impact.
+    - Updated README, locale, and info.json to match the 0.4.0 direction.
+  Bugfixes:
+    - Kept all new impact layers behind settings and existing nil-safe helper checks.
+    - Reused the shared final-effect helpers so heavy projectile impact polish does not stack duplicate smoke markers.
+  License:
+    - GPL-3.0 derivative work based on KS Combat / KS Combat Updated by TheAppleIsALie and Klonan.
+---------------------------------------------------------------------------------------------------
+
+---------------------------------------------------------------------------------------------------
+Version: 0.3.0
+Date: 2026-06-13
+  Major Features:
+    - Added the new Combat FX preset startup setting: Subtle, Balanced, and Cinematic.
+    - Added scalable smoke/light intensity handling so the same mod can be cleaner for UPS-heavy games or heavier for screenshot-style combat.
+    - Added configurable physical bullet speed.
+    - Added configurable shotgun pellet range and shotgun fire-rate multiplier.
+    - Added configurable rocket wobble/inaccuracy for less laser-perfect physical rockets.
+    - Added heavy ordnance impact polish for rockets, cannon shells, and arcing ordnance where safe.
+  Minor Features:
+    - Added optional cannon shell smoke trails.
+    - Moved cannon smoke prototype definition into the shared FX module.
+    - Updated English locale for all new v0.3.0 settings and string-setting values.
+    - Updated README and info.json for the new AAA-feel direction.
+  Bugfixes:
+    - Added reusable final-action FX helper to avoid stacking duplicate heavy smoke on the same projectile.
+    - Kept v0.2.0 working prototype guards and nil-safe handling.
+  License:
+    - GPL-3.0 derivative work based on KS Combat / KS Combat Updated by TheAppleIsALie and Klonan.
+---------------------------------------------------------------------------------------------------
+
+---------------------------------------------------------------------------------------------------
+Version: 0.2.0
+Date: 2026-06-13
+  Major Features:
+    - Added a shared lightweight combat FX module for custom smoke/impact polish.
+    - Added optional bullet smoke trails and impact puffs/sparks for generated physical bullets.
+    - Added optional shotgun pellet smoke and safer pellet impact FX.
+    - Added optional rocket wake smoke for physical rockets.
+    - Reworked turret-leading logic so compatible ammo-turrets are tuned by ammo category, not only by a short hardcoded list.
+  Minor Features:
+    - Added configurable generated bullet range.
+    - Added new startup toggles for impact FX, bullet trails, shotgun pellet smoke, and rocket smoke trails.
+    - Updated English locale names and descriptions for the new settings.
+    - Updated README to explain the v0.2.0 direction.
+  Bugfixes:
+    - Added more nil-safe handling around generated projectile effects and optional mod prototype lookup.
+    - Kept FX definitions lightweight and reusable instead of embedding duplicate smoke prototypes in every module.
+  License:
+    - GPL-3.0 derivative work based on KS Combat / KS Combat Updated by TheAppleIsALie and Klonan.
+---------------------------------------------------------------------------------------------------
+
+---------------------------------------------------------------------------------------------------
+Version: 0.1.0
+Date: 2026-06-13
+  Major Features:
+    - First Squishy Combat Reforged build.
+    - Rebuilt package under a new mod name and new settings namespace.
+    - Physical bullets, glowing tracers, shotgun tuning, physical rockets, arcing ordnance, turret leading, and wall-blocked spitter projectile toggles.
+  Minor Features:
+    - Added full English setting names and descriptions.
+    - Added new README and compliance notes.
+    - Added new custom thumbnail.
+  Bugfixes:
+    - Added safer prototype guards around missing projectiles, streams, ammo actions, and optional mod prototypes.
+  Optimizations:
+    - Moved combat edits into focused prototype modules loaded from data-final-fixes.
+  License:
+    - GPL-3.0 derivative work based on KS Combat / KS Combat Updated by TheAppleIsALie and Klonan.
+---------------------------------------------------------------------------------------------------

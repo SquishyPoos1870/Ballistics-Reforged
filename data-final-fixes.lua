@@ -1,0 +1,8 @@
+require("prototypes.effects")
+require("prototypes.bullets")
+require("prototypes.shotguns")
+require("prototypes.rockets")
+require("prototypes.throwables")
+require("prototypes.cannon")
+require("prototypes.spitters")
+require("prototypes.turrets")

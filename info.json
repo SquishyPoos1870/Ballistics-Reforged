@@ -1,0 +1,15 @@
+{
+  "name": "ballistics_reforged",
+  "version": "1.0.0",
+  "title": "Ballistics Reforged",
+  "author": "Squishy1870, TheAppleIsALie, Klonan",
+  "contact": "Squishy1870 via the Factorio Mod Portal",
+  "description": "A rebuilt ballistics and battlefield-feel mod for Factorio 2.0 focused on projectile polish: physical bullet tracers, subtle/balanced/cinematic FX presets, impact layering, tuned shotgun behaviour, physical rockets with smoke and impact polish, arcing shells and throwables, turret projectile leading, and optional wall-blocked spitter shots. This is the first stable Ballistics Reforged release. It is a heavily modified GPL-3.0 derivative based on KS Combat / KS Combat Updated, rebuilt under a new mod identity with reorganised structure, new settings, new FX systems, and balance/polish passes.",
+  "factorio_version": "2.0",
+  "dependencies": [
+    "base >= 2.0",
+    "? RampantArsenal",
+    "? bobwarfare",
+    "? CombatRobotsOverhaul"
+  ]
+}
