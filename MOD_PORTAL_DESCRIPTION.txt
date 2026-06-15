@@ -4,16 +4,18 @@ It focuses on making bullets, rockets, shells, shotgun pellets, turret fire, and
 
 Features:
 - Physical bullet tracers
+- Ammo-specific tracer identities for standard, piercing, and uranium bullet ammo
 - Subtle / Balanced / Cinematic FX presets
 - Impact layering and big-fight FX cap
 - Tuned shotgun behaviour
 - Physical rockets with smoke and heavier impact feel
 - Arcing shells and throwables
 - Turret projectile leading
+- Configurable turret ammo buffer
 - Optional wall-blocked spitter projectiles
 - Cleaner impact smoke, dust, debris, and bug-hit feedback
 
-1.0.0 is the first stable public release.
+1.2.2 improves tracer readability so the default Enhanced mode is clearer in night fights while still avoiding the old laser-like look.
 
 License / credits:
 This is a heavily modified GPL-3.0 derivative based on KS Combat / KS Combat Updated by TheAppleIsALie and Klonan. Original author credit and GPL-3.0 licensing are kept.

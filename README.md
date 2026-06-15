@@ -5,6 +5,9 @@ Ballistics Reforged is a rebuilt ballistics and battlefield-feel mod for Factori
 ## Features
 
 - Physical bullet tracers
+- Ammo-specific tracer identities for standard, piercing, and uranium bullet ammo
+- Realistic / Enhanced / Arcade tracer style setting
+- Tracer scale and glow strength controls
 - Subtle / Balanced / Cinematic FX presets
 - Impact layering: Clean / Balanced / Full
 - Big-fight FX cap for cleaner large turret battles
@@ -13,11 +16,12 @@ Ballistics Reforged is a rebuilt ballistics and battlefield-feel mod for Factori
 - Arcing grenades, capsules, cannon shells, and atomic bomb
 - Optional wall-blocked spitter projectiles
 - Turret projectile leading
+- Configurable turret ammo buffer to reduce brief refill alerts
 - Cleaner impact, dust, debris, and bug-hit feedback
 
 ## Current version focus
 
-Version 1.0.0 is the first stable public release. It includes the Combat Polish + FX Balance pass, the 288x288 Ballistics Reforged thumbnail, and the final Ballistics Reforged branding.
+Version 1.2.2 is the Tracer Readability Pass. It keeps the less-laser direction, but increases the default Enhanced tracer body and glow so tracers are readable in night fights again.
 
 ## Compatibility
 

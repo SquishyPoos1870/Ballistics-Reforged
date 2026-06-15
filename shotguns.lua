@@ -36,3 +36,6 @@ smoke("br-ground-impact-dust", 0.30, 30, 18, 16 / 60)
 smoke("br-bug-hit-mist", 0.19, 22, 13, 20 / 60)
 smoke("br-acid-impact-smoke", 0.30, 36, 20, 18 / 60)
 
+
+-- 1.2.0 lighter tracer smoke for realistic tracer style.
+smoke("br-realistic-tracer-smoke", 0.08, 9, 6, 24 / 60)

@@ -1,15 +1,55 @@
-{
-  "name": "ballistics_reforged",
-  "version": "1.0.0",
-  "title": "Ballistics Reforged",
-  "author": "Squishy1870, TheAppleIsALie, Klonan",
-  "contact": "Squishy1870 via the Factorio Mod Portal",
-  "description": "A rebuilt ballistics and battlefield-feel mod for Factorio 2.0 focused on projectile polish: physical bullet tracers, subtle/balanced/cinematic FX presets, impact layering, tuned shotgun behaviour, physical rockets with smoke and impact polish, arcing shells and throwables, turret projectile leading, and optional wall-blocked spitter shots. This is the first stable Ballistics Reforged release. It is a heavily modified GPL-3.0 derivative based on KS Combat / KS Combat Updated, rebuilt under a new mod identity with reorganised structure, new settings, new FX systems, and balance/polish passes.",
-  "factorio_version": "2.0",
-  "dependencies": [
-    "base >= 2.0",
-    "? RampantArsenal",
-    "? bobwarfare",
-    "? CombatRobotsOverhaul"
-  ]
+local lib = require("prototypes.lib")
+
+local use_leading = lib.setting("br-turret-leading")
+local ammo_buffer = lib.setting("br-turret-ammo-buffer") or 3
+
+local explicit_lead_speeds = {
+  ["gun-turret"] = 1.05,
+  ["rifle-ammo-turret-rampant-arsenal"] = 1.05,
+  ["gun-ammo-turret-rampant-arsenal"] = 1.05,
+  ["shotgun-ammo-turret-rampant-arsenal"] = 1.05,
+  ["rocket-ammo-turret-rampant-arsenal"] = 0.55,
+  ["rapid-rocket-ammo-turret-rampant-arsenal"] = 0.55,
+  ["cannon-ammo-turret-rampant-arsenal"] = 0.80,
+  ["rapid-cannon-ammo-turret-rampant-arsenal"] = 0.80
 }
+
+local category_lead_speeds = {
+  bullet = 1.05,
+  ["shotgun-shell"] = 1.05,
+  rocket = 0.55,
+  ["cannon-shell"] = 0.80
+}
+
+local function lead_speed_for(turret)
+  if explicit_lead_speeds[turret.name] then return explicit_lead_speeds[turret.name] end
+  local attack = turret.attack_parameters
+  if not attack then return nil end
+  if attack.ammo_category and category_lead_speeds[attack.ammo_category] then
+    return category_lead_speeds[attack.ammo_category]
+  end
+  return nil
+end
+
+local function is_supported_ammo_turret(turret)
+  local attack = turret and turret.attack_parameters
+  if not attack then return false end
+  if attack.ammo_category and category_lead_speeds[attack.ammo_category] then return true end
+  if explicit_lead_speeds[turret.name] then return true end
+  return false
+end
+
+for _, turret in pairs(data.raw["ammo-turret"] or {}) do
+  if is_supported_ammo_turret(turret) then
+    if ammo_buffer and ammo_buffer > 1 then
+      turret.inventory_size = math.max(turret.inventory_size or 1, ammo_buffer)
+    end
+
+    if use_leading and turret.attack_parameters then
+      local speed = lead_speed_for(turret)
+      if speed then
+        turret.attack_parameters.lead_target_for_projectile_speed = speed
+      end
+    end
+  end
+end

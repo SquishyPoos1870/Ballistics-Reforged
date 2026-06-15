@@ -15,6 +15,11 @@ br-ground-impact-dust=Ground impact dust
 br-spitter-impact-fx=Spitter impact FX
 br-impact-layering=Impact layering
 br-big-fight-fx-cap=Big-fight FX cap
+br-ammo-identity-tracers=Ammo-specific tracer colors
+br-tracer-style=Tracer style
+br-tracer-scale=Tracer body scale
+br-tracer-glow-strength=Tracer glow strength
+br-tracer-smoke-realism=Realistic tracer smoke
 br-shotgun-rework=Shotgun rework
 br-shotgun-autoaim=Auto-target shotgun weapons
 br-shotgun-dynamic-spread=Dynamic shotgun spread
@@ -33,6 +38,7 @@ br-cannon-smoke-trails=Cannon shell smoke trails
 br-arcing-atomic-bomb=Arcing atomic bomb
 br-walls-block-spitters=Walls block spitter projectiles
 br-turret-leading=Turrets lead moving targets
+br-turret-ammo-buffer=Turret ammo buffer size
 
 [mod-setting-description]
 br-combat-fx-preset=Scales the visual FX without changing weapon damage. Subtle is cleaner, Balanced is the intended default, Cinematic is heavier and flashier.
@@ -51,6 +57,11 @@ br-ground-impact-dust=Adds extra dust puffs to impacts so misses and heavy hits 
 br-spitter-impact-fx=Adds extra acid splash/smoke feedback to converted spitter projectile impacts.
 br-impact-layering=Controls how many extra smoke/dust layers are added to impacts. Clean is lighter, Balanced is recommended, Full is heavier.
 br-big-fight-fx-cap=Limits extra smoke layers on small bullet/shotgun impacts. Lower values are cleaner in large turret fights.
+br-ammo-identity-tracers=Gives generated bullet tracers different color identities. Standard rounds are yellow, piercing rounds are red-orange, and uranium rounds are green.
+br-tracer-style=Controls how visible generated bullet tracers are. Enhanced is the recommended default, Realistic is dimmer and tighter, Arcade is brighter and more game-like.
+br-tracer-scale=Scales the generated tracer body. Default is tuned for readable night fights without going full laser.
+br-tracer-glow-strength=Scales tracer light and halo strength. Default keeps tracers visible while staying less beam-like.
+br-tracer-smoke-realism=Uses lighter tracer smoke in realistic mode so bullets look like hot streaks instead of smoke beams.
 br-shotgun-rework=Improves shotgun pellet behaviour, range, collision feel, and firing cadence.
 br-shotgun-autoaim=Player shotguns target enemies automatically. Hold the normal force-fire controls for manual behaviour.
 br-shotgun-dynamic-spread=Makes shotgun spread tighter near the cursor and wider over distance.
@@ -69,8 +80,12 @@ br-cannon-smoke-trails=Adds smoke trails to cannon shell streams.
 br-arcing-atomic-bomb=Atomic bombs travel in a slower visible arc.
 br-walls-block-spitters=Converts spitter streams to physical projectiles that can collide with walls and entities.
 br-turret-leading=Adds projectile lead values to vanilla and compatible modded ammo turrets.
+br-turret-ammo-buffer=Minimum ammo inventory size for ammo turrets. Raising this reduces brief out-of-ammo alerts when inserters refill turrets during heavy fights. Set to 1 for vanilla-style buffering.
 
 [string-mod-setting]
+br-tracer-style-realistic=Realistic
+br-tracer-style-enhanced=Enhanced
+br-tracer-style-arcade=Arcade
 br-impact-layering-clean=Clean
 br-impact-layering-balanced=Balanced
 br-impact-layering-full=Full
@@ -79,6 +94,9 @@ br-combat-fx-preset-balanced=Balanced
 br-combat-fx-preset-cinematic=Cinematic
 
 [string-mod-setting-description]
+br-tracer-style-realistic=Dimmer, slimmer, less glow. Best for real tracer feel.
+br-tracer-style-enhanced=Recommended default. Readable at night, but still less laser-like than old versions.
+br-tracer-style-arcade=Brighter game-style tracers for players who want maximum visibility.
 br-impact-layering-clean=Fewer extra impact layers. Best for large bases and heavy turret walls.
 br-impact-layering-balanced=Recommended default. Keeps hits visible without over-smoking the battlefield.
 br-impact-layering-full=Maximum impact polish. Best for screenshots, small fights, and cinematic gameplay.

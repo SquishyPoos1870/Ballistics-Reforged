@@ -61,6 +61,11 @@ data:extend({
   startup_bool("br-spitter-impact-fx", "am", true),
   startup_string("br-impact-layering", "an", "balanced", {"clean", "balanced", "full"}),
   startup_int("br-big-fight-fx-cap", "ao", 2, 1, 4),
+  startup_bool("br-ammo-identity-tracers", "ap", true),
+  startup_string("br-tracer-style", "aq", "enhanced", {"realistic", "enhanced", "arcade"}),
+  startup_double("br-tracer-scale", "ar", 1.05, 0.35, 1.25),
+  startup_double("br-tracer-glow-strength", "as", 1.00, 0.20, 1.50),
+  startup_bool("br-tracer-smoke-realism", "at", true),
 
   startup_bool("br-shotgun-rework", "ba", true),
   startup_bool("br-shotgun-autoaim", "bb", false),
@@ -82,5 +87,6 @@ data:extend({
   startup_bool("br-arcing-atomic-bomb", "dd", true),
 
   startup_bool("br-walls-block-spitters", "ea", true),
-  startup_bool("br-turret-leading", "fa", true)
+  startup_bool("br-turret-leading", "fa", true),
+  startup_int("br-turret-ammo-buffer", "fb", 3, 1, 10)
 })

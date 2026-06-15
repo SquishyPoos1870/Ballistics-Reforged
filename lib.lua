@@ -10,9 +10,73 @@ local autoaim = lib.setting("br-gun-autoaim")
 local magazine_size = lib.setting("br-bullet-magazine-size") or 20
 local bullet_range = lib.setting("br-bullet-range") or 35
 local use_smoke = lib.setting("br-bullet-smoke-trails")
+local ammo_identity = lib.setting("br-ammo-identity-tracers") ~= false
+local tracer_style = lib.setting("br-tracer-style") or "realistic"
+local tracer_scale_setting = lib.setting("br-tracer-scale") or 0.70
+local tracer_glow_setting = lib.setting("br-tracer-glow-strength") or 0.60
+local realistic_smoke = lib.setting("br-tracer-smoke-realism") ~= false
+
+local function tracer_style_values()
+  if tracer_style == "arcade" then
+    return {scale = 1.00, light = 1.08, body_alpha = 1.00, glow = true}
+  elseif tracer_style == "realistic" then
+    return {scale = 0.76, light = 0.70, body_alpha = 0.94, glow = true}
+  else
+    return {scale = 0.95, light = 0.96, body_alpha = 1.00, glow = true}
+  end
+end
+
+local function identity_for_ammo(name)
+  local key = string.lower(name or "")
+  local style = tracer_style_values()
+  local body_scale = math.max(0.45, (style.scale or 0.95) * tracer_scale_setting)
+  local light_mult = math.max(0.20, (style.light or 0.96) * tracer_glow_setting)
+  local alpha = style.body_alpha or 1.00
+
+  -- 1.2.2 tracer readability pass:
+  -- clearer at night, but still controlled enough to avoid the old beam/laser look.
+  if key:find("uranium") then
+    return {
+      tint = {r = 0.58, g = 0.98, b = 0.36, a = alpha},
+      primary = {r = 0.34, g = 0.92, b = 0.22},
+      secondary = {r = 0.12, g = 0.55, b = 0.12},
+      light_intensity = 0.84 * light_mult,
+      light_size = 4.7 * light_mult,
+      glow_intensity = 0.060 * light_mult,
+      glow_size = 2.9 * light_mult,
+      body_scale = body_scale,
+      draw_as_glow = style.glow
+    }
+  elseif key:find("piercing") or key:find("armor%-piercing") or key:find("armour%-piercing") then
+    return {
+      tint = {r = 1.00, g = 0.50, b = 0.20, a = alpha},
+      primary = {r = 0.94, g = 0.38, b = 0.12},
+      secondary = {r = 0.50, g = 0.18, b = 0.08},
+      light_intensity = 0.80 * light_mult,
+      light_size = 4.5 * light_mult,
+      glow_intensity = 0.056 * light_mult,
+      glow_size = 2.8 * light_mult,
+      body_scale = body_scale,
+      draw_as_glow = style.glow
+    }
+  else
+    return {
+      tint = {r = 1.00, g = 0.92, b = 0.24, a = alpha},
+      primary = {r = 1.00, g = 0.80, b = 0.12},
+      secondary = {r = 0.58, g = 0.32, b = 0.06},
+      light_intensity = 0.82 * light_mult,
+      light_size = 4.5 * light_mult,
+      glow_intensity = 0.058 * light_mult,
+      glow_size = 2.8 * light_mult,
+      body_scale = body_scale,
+      draw_as_glow = style.glow
+    }
+  end
+end
 
 local function make_bullet_projectile(name, effects)
   local projectile_name = lib.safe_name("br-", name, "-bullet-projectile")
+  local identity = identity_for_ammo(name)
 
   effects = lib.append_all(effects or {}, lib.impact_effects("bullet"))
 
@@ -39,7 +103,9 @@ local function make_bullet_projectile(name, effects)
       width = 3,
       height = 50,
       priority = "high",
-      draw_as_glow = use_glow
+      draw_as_glow = use_glow and (identity.draw_as_glow or false),
+      tint = identity.tint,
+      scale = identity.body_scale or 0.86
     },
     shadow = {
       filename = "__base__/graphics/entity/bullet/bullet.png",
@@ -52,10 +118,10 @@ local function make_bullet_projectile(name, effects)
     light = use_glow and {
       {
         type = "oriented",
-        intensity = 0.70 * light_scale,
-        size = 4 * light_scale,
+        intensity = (identity.light_intensity or 0.56) * light_scale,
+        size = (identity.light_size or 3.6) * light_scale,
         minimum_darkness = 0,
-        color = {r = 1.0, g = 0.92, b = 0.45},
+        color = identity.primary,
         shift = {0, 2},
         picture = {
           layers = {{
@@ -66,16 +132,17 @@ local function make_bullet_projectile(name, effects)
             shift = {0, -0.25},
             rotate_shift = false,
             add_perspective = false,
-            scale = 1
+            scale = identity.body_scale or 0.86,
+            tint = identity.tint
           }}
         }
       },
       {
         type = "oriented",
-        intensity = 0.06 * light_scale,
-        size = 3 * light_scale,
+        intensity = (identity.glow_intensity or 0.042) * light_scale,
+        size = (identity.glow_size or 2.5) * light_scale,
         minimum_darkness = 0,
-        color = {r = 1.0, g = 0.82, b = 0.35},
+        color = identity.secondary,
         picture = {
           layers = {{
             filename = "__core__/graphics/light-small.png",
@@ -92,7 +159,9 @@ local function make_bullet_projectile(name, effects)
   }
 
   if use_smoke then
-    projectile.smoke = {lib.smoke_source("br-bullet-tracer-smoke", 1, {0.02, 0.02})}
+    local smoke_name = (tracer_style == "realistic" and realistic_smoke) and "br-realistic-tracer-smoke" or "br-bullet-tracer-smoke"
+    local deviation = (tracer_style == "realistic" and realistic_smoke) and {0.01, 0.01} or {0.02, 0.02}
+    projectile.smoke = {lib.smoke_source(smoke_name, 1, deviation)}
   end
 
   lib.define_once("projectile", projectile)
