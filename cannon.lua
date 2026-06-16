@@ -103,3 +103,7 @@ br-impact-layering-full=Maximum impact polish. Best for screenshots, small fight
 br-combat-fx-preset-subtle=Cleaner visuals for large bases and heavy turret fights.
 br-combat-fx-preset-balanced=Recommended default: visible combat polish without going overboard.
 br-combat-fx-preset-cinematic=Heavier smoke, stronger glow, and bigger impact feel. Best for screenshots and smaller fights.
+
+[ammo-category-name]
+br-player-bullet=Bullet
+br-player-shotgun-shell=Shotgun shells

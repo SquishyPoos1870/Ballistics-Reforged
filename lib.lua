@@ -15,6 +15,9 @@ local tracer_style = lib.setting("br-tracer-style") or "realistic"
 local tracer_scale_setting = lib.setting("br-tracer-scale") or 0.70
 local tracer_glow_setting = lib.setting("br-tracer-glow-strength") or 0.60
 local realistic_smoke = lib.setting("br-tracer-smoke-realism") ~= false
+local player_bullet_category = "br-player-bullet"
+
+lib.define_once("ammo-category", {type = "ammo-category", name = player_bullet_category})
 
 local function tracer_style_values()
   if tracer_style == "arcade" then
@@ -33,7 +36,7 @@ local function identity_for_ammo(name)
   local light_mult = math.max(0.20, (style.light or 0.96) * tracer_glow_setting)
   local alpha = style.body_alpha or 1.00
 
-  -- 1.2.2 tracer readability pass:
+  -- Tracer readability pass:
   -- clearer at night, but still controlled enough to avoid the old beam/laser look.
   if key:find("uranium") then
     return {
@@ -74,11 +77,11 @@ local function identity_for_ammo(name)
   end
 end
 
-local function make_bullet_projectile(name, effects)
-  local projectile_name = lib.safe_name("br-", name, "-bullet-projectile")
+local function make_bullet_projectile(name, effects, allow_same_force)
+  local projectile_name = lib.safe_name("br-", name, allow_same_force and "-player-bullet-projectile" or "-bullet-projectile")
   local identity = identity_for_ammo(name)
 
-  effects = lib.append_all(effects or {}, lib.impact_effects("bullet"))
+  effects = lib.append_all(lib.copy(effects) or {}, lib.impact_effects("bullet"))
 
   local projectile = {
     type = "projectile",
@@ -89,7 +92,8 @@ local function make_bullet_projectile(name, effects)
     acceleration = 0,
     direction_only = true,
     hit_at_collision_position = true,
-    force_condition = "not-same",
+    -- Enemy-only for turrets/automation; player gun variants use "all" so force-fire can damage same-force buildings like vanilla.
+    force_condition = allow_same_force and "all" or "not-same",
     action = {
       type = "direct",
       action_delivery = {
@@ -181,8 +185,8 @@ local function make_bullet_projectile(name, effects)
   }
 end
 
-local function convert_ammo_type(ammo_type, source_name)
-  if not ammo_type then return end
+local function convert_ammo_type(ammo_type, source_name, make_player_variant)
+  if not ammo_type then return nil end
   ammo_type.target_type = autoaim and "entity" or "direction"
 
   local effects = {}
@@ -197,9 +201,24 @@ local function convert_ammo_type(ammo_type, source_name)
     end
   end
 
-  if next(effects) then
-    table.insert(ammo_type.action, make_bullet_projectile(source_name, effects))
+  if not next(effects) then return nil end
+
+  -- Keep the normal bullet category hostile-only so ammo turrets do not chew through the
+  -- player's own walls and machines when firing physical projectiles across the base.
+  table.insert(ammo_type.action, make_bullet_projectile(source_name, effects, false))
+
+  if make_player_variant then
+    -- Player-held bullet weapons use a duplicate ammo category with a same-force-capable
+    -- projectile. Normal auto-targeting still selects enemies, but force-fire now works
+    -- on your own chests/buildings again.
+    local player_ammo_type = lib.copy(ammo_type)
+    player_ammo_type.category = player_bullet_category
+    local player_actions = lib.actions(player_ammo_type)
+    player_actions[#player_actions] = make_bullet_projectile(source_name, effects, true)
+    return player_ammo_type
   end
+
+  return nil
 end
 
 local function ammo_is_bullet(ammo)
@@ -213,23 +232,39 @@ end
 
 for _, ammo in pairs(data.raw.ammo or {}) do
   if ammo_is_bullet(ammo) then
-    for _, ammo_type in pairs(lib.ammo_types(ammo)) do
-      convert_ammo_type(ammo_type, ammo.name)
+    local ammo_types = lib.ammo_types(ammo)
+    local player_variants = {}
+    for _, ammo_type in pairs(ammo_types) do
+      local player_variant = convert_ammo_type(ammo_type, ammo.name, true)
+      if player_variant then table.insert(player_variants, player_variant) end
     end
+    for _, player_variant in pairs(player_variants) do
+      table.insert(ammo_types, player_variant)
+    end
+    if next(player_variants) then ammo.ammo_type = ammo_types end
     ammo.magazine_size = magazine_size
+  end
+end
+
+-- Give hand-held / vehicle gun prototypes the player category so manual force-fire can hit same-force entities.
+-- Ammo turrets keep the normal bullet category and therefore keep their hostile-only safety behaviour.
+for _, gun in pairs(data.raw.gun or {}) do
+  local attack = gun and gun.attack_parameters
+  if attack and attack.ammo_category == "bullet" then
+    attack.ammo_category = player_bullet_category
   end
 end
 
 -- Rampant Arsenal passive defense uses bullet-style attack parameters instead of an ammo item.
 local equipment = data.raw["active-defense-equipment"] and data.raw["active-defense-equipment"]["bullets-passive-defense-rampant-arsenal"]
 if equipment and equipment.attack_parameters and equipment.attack_parameters.ammo_type then
-  convert_ammo_type(equipment.attack_parameters.ammo_type, equipment.name)
+  convert_ammo_type(equipment.attack_parameters.ammo_type, equipment.name, false)
 end
 
 -- Defender robots also get physical tracer bullets when their attack is still instant damage.
 local defender = data.raw["combat-robot"] and data.raw["combat-robot"].defender
 if defender and defender.attack_parameters and defender.attack_parameters.ammo_type then
-  convert_ammo_type(defender.attack_parameters.ammo_type, defender.name)
+  convert_ammo_type(defender.attack_parameters.ammo_type, defender.name, false)
   defender.attack_parameters.lead_target_for_projectile_speed = projectile_speed
   defender.attack_parameters.projectile_center = {0, 0}
 end

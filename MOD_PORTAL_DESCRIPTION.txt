@@ -15,7 +15,7 @@ Features:
 - Optional wall-blocked spitter projectiles
 - Cleaner impact smoke, dust, debris, and bug-hit feedback
 
-1.2.2 improves tracer readability so the default Enhanced mode is clearer in night fights while still avoiding the old laser-like look.
+1.2.3 fixes manual force-fire against your own chests/buildings. Player-held bullet and shotgun weapons now use same-force-capable projectile variants, while ammo turrets keep hostile-only projectile safety so they do not chew through your own walls.
 
 License / credits:
 This is a heavily modified GPL-3.0 derivative based on KS Combat / KS Combat Updated by TheAppleIsALie and Klonan. Original author credit and GPL-3.0 licensing are kept.
